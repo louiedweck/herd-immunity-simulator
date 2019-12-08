@@ -67,7 +67,6 @@ class Simulation:
         self.print_population()
 
         time_step_counter = 0
-        should_continue = True
 
         self.file_writer.init_file(self.virus, self.population_size,
                                    self.initial_vaccinated, self.initial_healthy, self.initial_infected)

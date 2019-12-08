@@ -19,6 +19,17 @@ class Person:
         If Person survives, they become vaccinated and they have no infection (set the vaccinated attibute to True and the infection to None)
         Return True if they survived the infection and False if they did not. 
         '''
+        y = random.uniform(0, 1)
+        if y < self.infection.mortality_num:
+            self.is_alive is False
+            return False
+        else:
+            self.is_alive is True
+            self.is_vaccinated is True
+            self.infection is False
+            return True
 
-        # TODO: finish this method
-        pass
+
+louie_virus = Virus("Aids", .5, .9)
+louie = Person(True, louie_virus)
+print(louie.did_survive_infection())
