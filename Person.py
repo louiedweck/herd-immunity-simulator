@@ -19,8 +19,8 @@ class Person:
         If Person survives, they become vaccinated and they have no infection (set the vaccinated attibute to True and the infection to None)
         Return True if they survived the infection and False if they did not. 
         '''
-        y = random.uniform(0, 1)
-        if y < self.infection.mortality_num:
+        random_float = random.uniform(0, 1)
+        if random_float < self.infection.mortality_num:
             self.is_alive is False
             return False
         else:

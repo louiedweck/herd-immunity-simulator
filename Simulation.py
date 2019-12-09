@@ -28,15 +28,15 @@ class Simulation:
         '''Creates the population (a list of Person objects) consisting of initial infected people, initial healthy non-vaccinated people, and 
         initial healthy vaccinated people. Adds them to the population list'''
 
-        for i in range(self.initial_infected):
+        for _ in range(self.initial_infected):
             person = Person(False, virus)
             self.population.append(person)
 
-        for i in range(self.initial_healthy):
+        for _ in range(self.initial_healthy):
             person = Person(False, None)
             self.population.append(person)
 
-        for i in range(self.initial_vaccinated):
+        for _ in range(self.initial_vaccinated):
             person = Person(True, None)
             self.population.append(person)
 
@@ -44,7 +44,7 @@ class Simulation:
         '''Prints out every person in the population and their current attributes'''
         for person in self.population:
             print(f''' Is person alive? {person.is_alive}
-                    Is person vaccinated? {person.is_vaccianted}
+                    Is person vaccinated? {person.is_vaccinated}
                     Is person infected? {person.infection}
              ''')
 
@@ -113,17 +113,15 @@ class Simulation:
                 self.total_vaccinated += 1
             else:
                 self.total_dead += 1
+        return infected
 
     def time_step(self, infected):
         ''' For every infected person interact with a random person from the population 10 times'''
 
         for infected_person in infected:
-
-            for i in range(10):
-                random.choice(self.population)
-                # TODO: using the random index get a random person from the population
-                # TODO: call interaction() with the current infected person and the random person
-                pass
+            for _ in range(10):
+                random_person = random.choice(self.population)
+                self.interaction(random_person, infected_person)
 
     def interaction(self, infected, random_person):
         '''If the infected person is the same object as the random_person return and do nothing
@@ -133,7 +131,20 @@ class Simulation:
             generate a random float between 0 and 1
             if the random float is less then the infected person's virus reproduction number then the random person is infected
             othersie the random person is vaccinated and one is added to the total vaccinated'''
-        # TODO: finish this method
+        for infected_person in infected:
+            if infected_person == random_person:
+                return
+            elif random_person.is_alive is False:
+                return
+            elif random_person.is_vaccinated:
+                return
+            elif random_person.is_vaccinated is False:
+                random_float = random.uniform(0, 1)
+                if random_float < infected_person.reproduction_num:
+                    random_person.infection is True
+                else:
+                    random_person.is_vaccinated is True
+                    total_vaccinated += 1
 
 
 if __name__ == "__main__":
@@ -154,3 +165,4 @@ if __name__ == "__main__":
         initial_vaccinated, initial_infected, initial_healthy, virus, "results.txt")
 
     # run the simulation
+    simulation.run()
