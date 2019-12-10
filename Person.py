@@ -30,6 +30,7 @@ class Person:
             return True
 
 
-louie_virus = Virus("Aids", .5, .9)
-louie = Person(True, louie_virus)
-print(louie.did_survive_infection())
+if __name__ == '__main__':
+    louie_virus = Virus("Aids", .5, .9)
+    louie = Person(True, louie_virus)
+    print(louie.did_survive_infection())
